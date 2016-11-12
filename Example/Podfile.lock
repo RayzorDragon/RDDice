@@ -1,0 +1,22 @@
+PODS:
+  - Nimble (5.1.1)
+  - Quick (0.10.0)
+  - RDDice (0.1.0)
+
+DEPENDENCIES:
+  - Nimble (~> 5.0)
+  - Quick (~> 0.10.0)
+  - RDDice (from `../`)
+
+EXTERNAL SOURCES:
+  RDDice:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
+  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
+  RDDice: 6e202d82a1094ca4ac6175329605499e2a2cf28b
+
+PODFILE CHECKSUM: 69563f1fcfceeea547202233a0169e56d1dbfb87
+
+COCOAPODS: 1.1.1
