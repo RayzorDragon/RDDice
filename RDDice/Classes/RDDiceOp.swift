@@ -89,7 +89,10 @@ open class RDDiceOp {
 	class fileprivate func makeNewEquation(_ ops: [String], nums: [String]) -> String {
 		// recreate string with new modifications
 		var trimmedString = ""
-		if abs(nums.count - ops.count) == 0 {
+		if nums.count == 1 && ops.count == 0 {
+			// looks like we only have one thing?!
+			trimmedString = nums.first!
+		} else if abs(nums.count - ops.count) == 0 {
 			// if equal, assume we start with an op at the beginning
 			print("Do A Thing")
 			for index in 0...ops.count-1 {

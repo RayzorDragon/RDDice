@@ -126,4 +126,33 @@ class RDDiceTests: XCTestCase {
 		let answer = RDDiceOp.equationToTotal(testString)
 		expect(answer).to(match("9.0"))
 	}
+	
+	func testMultiDecCleanupOne() {
+		let testString = "1.2.3.4.5"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("1.2345"))
+	}
+	
+	func testMultiDecCleanupTwo() {
+		let testString = ".3.4.5"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("0.345"))
+	}
+	
+	func testMultiDecCleanupThree() {
+		let testString = "2.3.4."
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("2.34"))
+	}
+	
+	func testMultiDecCleanupFour() {
+		let testString = ".2.3.4."
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("0.234"))
+	}
+	
 }
