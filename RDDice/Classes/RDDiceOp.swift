@@ -93,7 +93,11 @@ open class RDDiceOp {
 			// if equal, assume we start with an op at the beginning
 			print("Do A Thing")
 			for index in 0...ops.count-1 {
-				trimmedString = trimmedString+ops[index]+nums[index]
+				if index == 0 && ops.first != "-" {
+					trimmedString = trimmedString+nums[index]
+				} else {
+					trimmedString = trimmedString+ops[index]+nums[index]
+				}
 			}
 		} else if abs(nums.count - ops.count) == 1 && nums.count > ops.count {
 			// if not equal, and we have more numbers than operators, assume we start with numbers

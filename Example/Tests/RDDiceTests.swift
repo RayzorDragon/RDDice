@@ -91,4 +91,39 @@ class RDDiceTests: XCTestCase {
 		let answer = RDDiceOp.equationToTotal(testString)
 		expect(answer).to(match("inf"))
 	}
+	
+	func testFrontOpAdd() {
+		let testString = "+3"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("3.0"))
+	}
+	
+	func testFrontOpSub() {
+		let testString = "-8"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("-8.0"))
+	}
+	
+	func testFrontOpMulti() {
+		let testString = "*4"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("4.0"))
+	}
+	
+	func testFrontOpDiv() {
+		let testString = "/7"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("7.0"))
+	}
+	
+	func testFrontOpExp() {
+		let testString = "**9"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("9.0"))
+	}
 }
