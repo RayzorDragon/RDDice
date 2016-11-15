@@ -9,12 +9,16 @@
 // the end goal of this class is to handle taking in string inputs in the form of human readable dice short hand (3d6, roll 3 six-sided dice. 3d4+3, roll 3 four-sided dice and add 3 to the total)
 // once this basic functionality is operational, then see about other dice formats (Fudge: 1dF produces a 1, 0, or -1, StoryTeller: Where rolling so many ten-sided dice produces so many successes, counting 7 or greater as a success, and 10 is a double success)
 // implement way to get random number generators that aren't the standard (Example: Web call out to random.org api)
+// improve dice op to 1.) Handle assumed multiplication if a number is presented before a BBP and 2.) handle modulus operations
 
 open class RDDiceOp {
 	
 	fileprivate let diceSymbol = "d"
+	fileprivate let diceOp = "~^"
 	fileprivate let fateSymbol = "f"
+	fileprivate let fateOp = ""
 	fileprivate let targetSymbol = "t"
+	fileprivate let targetOp = ""
 	
 	class fileprivate func equationCleanUp(_ equationString: String) -> String {
 		

@@ -168,4 +168,17 @@ class RDDiceTests: XCTestCase {
 		expect(answer).to(match("3"))
 	}
 	
+	func testDiceRoller() {
+		let numOfDice = 1000
+		let sidesOfDice = 4
+		let dicePool = numOfDice~^sidesOfDice // 35d4
+		
+		expect(dicePool.count).to(equal(numOfDice))
+		for die in dicePool {
+			expect(die).to(beGreaterThanOrEqualTo(1))
+			expect(die).to(beLessThanOrEqualTo(sidesOfDice))
+		}
+		
+	}
+	
 }
