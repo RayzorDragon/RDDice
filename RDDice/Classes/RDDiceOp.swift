@@ -18,15 +18,53 @@ open class RDDiceOp {
 	
 	class fileprivate func equationCleanUp(_ equationString: String) -> String {
 		
+		let simplifiedString = pbbCheckAndClean(equationString)
 		var exclusionSet = CharacterSet.letters
 		exclusionSet.formUnion(CharacterSet.whitespacesAndNewlines)
-		let components = equationString.components(separatedBy: exclusionSet)
+		let components = simplifiedString.components(separatedBy: exclusionSet)
 		var trimmedString = components.joined(separator: "")
 		
 		let ops = getOps(trimmedString)
 		let nums = getNums(trimmedString)
 		let cleanedEquation = makeNewEquation(ops, nums: nums)
 		return cleanedEquation
+	}
+	
+	class fileprivate func pbbCheckAndClean(_ equationString: String) -> String {
+		var newString = equationString
+		
+		// check string for following items [..], {..}, and (..). If they exist, evaluate them to a single number and then replace
+		let enderSet = CharacterSet.init(charactersIn: "]})")
+		let starterSet = CharacterSet.init(charactersIn: "[{(")
+		let brackets = CharacterSet.init(charactersIn: "[]")
+		let braces = CharacterSet.init(charactersIn: "{}")
+		let parenthis = CharacterSet.init(charactersIn: "()")
+		
+		while let rangeEnder = newString.rangeOfCharacter(from: enderSet) {
+			// step 1, find first ender
+			let ender = newString.substring(with: rangeEnder)
+			// step 2, find the matching starter
+			var starter = ""
+			if ender == "]" {
+				starter = "["
+			} else if ender == "}" {
+				starter = "{"
+			} else if ender == ")" {
+				starter = "("
+			}
+			
+			let subString = newString.substring(to: rangeEnder.lowerBound)
+			let rangeStarter = subString.range(of: starter, options: .backwards)
+			// step 3, evaluate everything between them by sending that string through equationCleanup
+			var newEqu = subString.substring(from: (rangeStarter?.upperBound)!)
+			newEqu = equationToTotal(newEqu)
+			// step 4, replace old string along with starters and enders with new value
+			let clRange: Range = (rangeStarter?.lowerBound)!..<rangeEnder.upperBound
+			newString.replaceSubrange(clRange, with: newEqu)
+			// take new string and repeat process until no more ender/starter pairs are found
+		}
+		
+		return newString
 	}
 	
 	class fileprivate func getOps(_ equationString: String) -> [String] {

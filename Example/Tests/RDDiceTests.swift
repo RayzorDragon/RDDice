@@ -155,4 +155,17 @@ class RDDiceTests: XCTestCase {
 		expect(answer).to(match("0.234"))
 	}
 	
+	func testBBPOne() {
+		let testString = "3*(2+4)-2"
+		
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("16"))
+	}
+	
+	func testBBPTwo() {
+		let testString = "{17+13}/[2*(6-1)]"
+		let answer = RDDiceOp.equationToTotal(testString)
+		expect(answer).to(match("3"))
+	}
+	
 }
